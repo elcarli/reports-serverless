@@ -8,5 +8,10 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@aws/dynamodb-data-mapper": "^0.7.3",
+    "aws-sdk": "^2.1092.0",
+    "uuid": "^8.3.2"
+  }
 }
