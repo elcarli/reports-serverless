@@ -12,6 +12,10 @@ provider:
         - dynamodb:*
       Resource:
         - arn:aws:dynamodb:us-east-1:022015240694:table/ItemTable
+  apiGateway:
+    binaryMediaTypes:
+      - "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+      - "application/pdf"
 
 functions:
   addItem:
@@ -43,7 +47,13 @@ functions:
     events:
       - httpApi:
           path: /items/{id}
-          method: delete       
+          method: delete
+  downloadXlsx:
+    handler: src/downloadXlsx.downloadXlsx
+    events:
+      - httpApi:
+          path: /reports/xlsx
+          method: get
 
 resources:
   Resources:
