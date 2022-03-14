@@ -54,6 +54,12 @@ functions:
       - httpApi:
           path: /reports/xlsx
           method: get
+  downloadPdf:
+    handler: src/downloadPdf.downloadPdf
+    events:
+      - httpApi:
+          path: /reports/pdf
+          method: get        
 
 resources:
   Resources:

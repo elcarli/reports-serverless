@@ -3,34 +3,15 @@ const { Parser, transforms: { flatten } } = require('json2csv');
 const XLSX = require("xlsx");
 
 const downloadXlsx = async (event) => {
-    //const dynamodb = new AWS.DynamoDB.DocumentClient();
-
-    // const result = await dynamodb.scan({
-    //     TableName: 'ItemTable'
-    // }).promise()
-
-    // const data = result.Items
-
-    //------------
-
     try {
-        const myCars = [
-            {
-                "car": { "make": "Audi", "model": "A3" },
-                "price": 40000,
-                "color": "blue"
-            }, {
-                "car": { "make": "BMW", "model": "F20" },
-                "price": 35000,
-                "color": "black"
-            }, {
-                "car": { "make": "Porsche", "model": "9PA AF1" },
-                "price": 60000,
-                "color": "green"
-            }
-        ];
+        const dynamodb = new AWS.DynamoDB.DocumentClient();
 
-        //const json2csvParser = new Parser({ excelStrings: true, transforms: [flatten('__')] });
+        const result = await dynamodb.scan({
+            TableName: 'ItemTable'
+        }).promise()
+
+        const data = result.Items
+
         const json2csvParser = new Parser({
             quote: '',
             transforms: [flatten({
@@ -39,7 +20,7 @@ const downloadXlsx = async (event) => {
                 separator: '_'
             })]
         });
-        const csvData = json2csvParser.parse(myCars);
+        const csvData = json2csvParser.parse(data);
 
         console.log('csvData');
         console.log(csvData);
@@ -78,7 +59,7 @@ const downloadXlsx = async (event) => {
         return {
             headers: {
                 'Content-Type': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-                'Content-Disposition': 'attachment; filename="hello.xlsx"',
+                'Content-Disposition': 'attachment; filename="report.xlsx"',
             },
             statusCode: 200,
             body: wbOut,
