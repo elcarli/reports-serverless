@@ -1,6 +1,7 @@
 const AWS = require('aws-sdk')
 const { UpdateExpression, ExpressionAttributes } = require('@aws/dynamodb-expressions');
 const { unmarshall } = AWS.DynamoDB.Converter;
+const { getNewData } = require('./utils')
 
 const updateExpressionProps = (expression) => {
     attributes = new ExpressionAttributes();
@@ -16,17 +17,13 @@ const updateItem = async (event) => {
     const dynamodb = new AWS.DynamoDB.DocumentClient();
     const { id } = event.pathParameters
 
-    const newData = JSON.parse(event.body)
-    
-    const updatedAt = new Date().toISOString()
-    newData.updatedAt = updatedAt
+    const newData = getNewData(event.body)
 
     expression = new UpdateExpression();
-    
+
     const keys = Object.keys(newData)
 
     for (const key of keys) {
-        console.log(`${key}`, newData[key])
         expression.set(`${key}`, newData[key])
     }
 

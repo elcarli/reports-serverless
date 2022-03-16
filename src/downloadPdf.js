@@ -11,32 +11,15 @@ const generatePdf = async (arrayOfArrays) => {
 
         const headers = arrayOfArrays.shift()
 
-        //{ label:"Name", property: 'name', width: 60}
-
-        const myHeaders = headers.map(value => {
-            const newHeader = {
-                label: `"${value}"`,
-                property: `'${value}'`,
-                width: 65
-            }
-            if (value == "id") {
-                console.log("WIDTH 400")
-                newHeader.width = 140
-            }
-
-            return newHeader
-        })
 
         // requires 
         const table = {
             title: "Title",
-            headers: myHeaders,
+            headers: headers,
             rows: arrayOfArrays,
         };
         doc.table(table, {
-            // A4 595.28 x 841.89 (portrait) (about width sizes)
             width: 300,
-            //columnsSize: [ 200, 100, 100 ],
         });
         // end code
         doc.end();

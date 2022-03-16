@@ -2,6 +2,10 @@ service: test
 
 frameworkVersion: '3'
 
+plugins:
+ - serverless-offline
+ - serverless-dynamodb-local
+
 provider:
   name: aws
   runtime: nodejs12.x

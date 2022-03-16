@@ -1,18 +1,25 @@
 const AWS = require('aws-sdk')
 
 const deleteItem = async (event) => {
-    const dynamodb = new AWS.DynamoDB.DocumentClient();
-    const { id } = event.pathParameters;
+    try {
+        const dynamodb = new AWS.DynamoDB.DocumentClient();
+        const { id } = event.pathParameters;
 
-    await dynamodb.delete({
-        TableName: 'ItemTable',
-        Key: { id }
-    }).promise()
+        await dynamodb.delete({
+            TableName: 'ItemTable',
+            Key: { id }
+        }).promise()
 
-    return {
-        status: 200,
-        body: {
-            message: `Item with ID: ${id} was deleted`
+        return {
+            status: 200,
+            body: {
+                message: `Item with ID: ${id} was deleted`
+            }
+        }
+    } catch (e) {
+        return {
+            status: 500,
+            error: e
         }
     }
 }

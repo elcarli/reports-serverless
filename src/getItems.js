@@ -2,17 +2,24 @@ const AWS = require('aws-sdk')
 
 
 const getItems = async (event) => {
-    const dynamodb = new AWS.DynamoDB.DocumentClient();
-    
-    const result = await dynamodb.scan({
-        TableName: 'ItemTable'
-    }).promise()
+    try {
+        const dynamodb = new AWS.DynamoDB.DocumentClient();
 
-    const data = result.Items
+        const result = await dynamodb.scan({
+            TableName: 'ItemTable'
+        }).promise()
 
-    return {
-        status: 200,
-        body: data
+        const data = result.Items
+
+        return {
+            status: 200,
+            body: data
+        }
+    } catch (e) {
+        return {
+            status: 500,
+            error: e
+        }
     }
 
 }

@@ -1,25 +1,26 @@
-const { v4 } = require('uuid')
 const AWS = require('aws-sdk')
-
+const { getItemData } = require('./utils')
 
 const addItem = async (event) => {
-    const dynamodb = new AWS.DynamoDB.DocumentClient();
-    
-    const createdAt = new Date().toISOString()
-    const id = v4()
+    try {
+        const dynamodb = new AWS.DynamoDB.DocumentClient();
 
-    const newItem = JSON.parse(event.body)
-    newItem.id = id
-    newItem.createdAt = createdAt
+        const data = getItemData(event.body)
 
-    await dynamodb.put({
-        TableName: 'ItemTable',
-        Item: newItem
-    }).promise()
+        await dynamodb.put({
+            TableName: 'ItemTable',
+            Item: data
+        }).promise()
 
-    return {
-        statusCode: 200,
-        body: JSON.stringify(newItem)
+        return {
+            statusCode: 200,
+            body: JSON.stringify(data)
+        }
+    } catch (e) {
+        return {
+            statusCode: 500,
+            error: e
+        }
     }
 }
 
