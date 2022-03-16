@@ -1,0 +1,178 @@
+{
+	"info": {
+		"_postman_id": "aa80ac98-6f5a-4203-9c56-225d931cd72f",
+		"name": "test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create an Item",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Enith Rodelo\",\r\n    \"phone\": 3016333700\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host_aws}}/items",
+					"host": [
+						"{{host_aws}}"
+					],
+					"path": [
+						"items"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update an Item",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"address\": \"Calle 7 de Agosto\",\r\n    \"phone\": 456\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host_aws}}/items/:itemId",
+					"host": [
+						"{{host_aws}}"
+					],
+					"path": [
+						"items",
+						":itemId"
+					],
+					"variable": [
+						{
+							"key": "itemId",
+							"value": "1de470d6-c8b7-46ad-8a59-e053cb3e13d7"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete an Item",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"address\": \"Calle 7 de Agosto\",\r\n    \"phone\": 456\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host_aws}}/items/:itemId",
+					"host": [
+						"{{host_aws}}"
+					],
+					"path": [
+						"items",
+						":itemId"
+					],
+					"variable": [
+						{
+							"key": "itemId",
+							"value": "1de470d6-c8b7-46ad-8a59-e053cb3e13d7"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List all Items",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host_aws}}/items",
+					"host": [
+						"{{host_aws}}"
+					],
+					"path": [
+						"items"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get Item by ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host_aws}}/items/:itemId",
+					"host": [
+						"{{host_aws}}"
+					],
+					"path": [
+						"items",
+						":itemId"
+					],
+					"variable": [
+						{
+							"key": "itemId",
+							"value": "1fb76bdf-1ded-4e3f-8579-2747f3ec4dcd"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get Report xlsx",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host_aws}}/reports/xlsx",
+					"host": [
+						"{{host_aws}}"
+					],
+					"path": [
+						"reports",
+						"xlsx"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get Report pdf",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host_aws}}/reports/pdf",
+					"host": [
+						"{{host_aws}}"
+					],
+					"path": [
+						"reports",
+						"pdf"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
